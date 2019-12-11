@@ -5,10 +5,11 @@ function App() {
 
 	const API_KEY = `91a00bed4607b32dc90c7ff92b4cddbc`;
 
-	const onButtonSubmit = async () => {
-		const response = await fetch(`api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=${API_KEY}`);
-		const data = await response.json();
-		console.log(data);
+	const onButtonSubmit = () => {
+		
+		const fetchData = fetch('http://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=91a00bed4607b32dc90c7ff92b4cddbc')
+							.then(res => res.json())
+							.then(data => console.log(data))
 	}
 
 	return (
