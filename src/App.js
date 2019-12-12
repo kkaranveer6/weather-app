@@ -1,15 +1,16 @@
 import React from 'react';
 import './App.css';
 
-function App() {
+function App(){
 
 	const API_KEY = `91a00bed4607b32dc90c7ff92b4cddbc`;
 
 	const onButtonSubmit = () => {
-		
-		const fetchData = fetch('http://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=91a00bed4607b32dc90c7ff92b4cddbc')
-							.then(res => res.json())
+	// fetching data from an API
+		const fetchData = fetch(`http://api.openweathermap.org/data/2.5/weather?q=Adelaide,aus&APPID=${API_KEY}&units=metric`)
+							.then(response => response.json())
 							.then(data => console.log(data))
+							.catch(err => console.log('Something went wrong'))
 	}
 
 	return (
