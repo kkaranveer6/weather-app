@@ -6,28 +6,22 @@ function App(){
 
 	// state
 	const [query, setQuery] = useState('adelaide');
-	const [data, setData] = useState('');
-
+	const [data, setData] = useState([]);
+	
 
 	// runs when search button is clicked
 	const getData = () => {
 		// fetching data from an API
-			fetch(`http://api.openweathermap.org/data/2.5/weather?q=${query},aus&APPID=${API_KEY}&units=metric`)
+			fetch(`http://api.openweathermap.org/data/2.5/weather?q=${query}&APPID=${API_KEY}&units=metric`)
 				.then(response => response.json())
-				.then(console.log('response to json'))
-
+				.then(jsonResponse => console.log(jsonResponse))
 				.then(res => setData(res))
-				.then(console.log('setting the data state to the response'))
-
-				.then(console.log(data))
 				.catch(err => console.log('Something went wrong'))
 		}
 	
 	const updateSearch = (event) => {
 		// setQuery(event.target.value);
-		setQuery('london');
-		console.log('city is set to london');
-		console.log('city : ' + query);
+		setQuery(event.target.value);
 		if(event.key === 'Enter'){
 			getData();
 		}
@@ -42,11 +36,10 @@ function App(){
 		  	name = "City Search" 
 		  	type = "text" 
 		  	placeholder = "Enter City"
-		  	onKeyPress = {updateSearch}
+		  	onChange = {updateSearch}
  		  />
 		  <button 
-		  	onClick = {updateSearch}
-		  	onClick = {updateSearch} 
+		  	onClick = {getData}
 		  >
 		  	Search
 		  </button>
