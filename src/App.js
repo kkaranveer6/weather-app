@@ -6,8 +6,9 @@ function App(){
 	const API_KEY = `0b3b530e772fd76341de3dada4786a6b`;
 
 	// state
-	const [search, setSearch] = useState('adelaide');
+	const [search, setSearch] = useState('');
 	const [city, setCity] = useState('');
+	const [data, setData] = useState('');
 	const [currentTemperature, setCurrentTemperature] = useState(0);
 
 
@@ -16,9 +17,11 @@ function App(){
 		fetch(`http://api.openweathermap.org/data/2.5/weather?q=${search}&APPID=${API_KEY}&units=metric`)
 			.then(response1 => response1.json())
 			// .then(response3 => console.log(response3))
-			.then(response2 => setCurrentTemperature(response2.main.temp))
+			.then(response2 => console.log(response2))
 			.catch(err => console.log(err))
-		}
+		setCity(search);
+		setSearch('');
+	}
 	
 	const updateSearch = (event) => {
 		setSearch(event.target.value);
@@ -46,7 +49,7 @@ function App(){
 
 		  	<CurrentTemp 
 		  		temp = {currentTemperature}
-		  		city = {search}
+		  		city = {city}
 		  	/>
 		</div>
 	);
