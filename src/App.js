@@ -7,27 +7,33 @@ function App(){
 
 	// state
 	const [search, setSearch] = useState('');
-	const [city, setCity] = useState('');
-	const [data, setData] = useState('');
+	const [cityName, setCityName] = useState('');
 	const [currentTemperature, setCurrentTemperature] = useState(0);
+	const [maxTemperature, setMaxTemperature] = useState(0);
+	const [minTemperature, setMinTemperature] = useState(0);
 
 
 	// runs when search button is clicked
-	const getData = () => {
+	const fetchData = () => {
 		fetch(`http://api.openweathermap.org/data/2.5/weather?q=${search}&APPID=${API_KEY}&units=metric`)
-			.then(response1 => response1.json())
-			// .then(response3 => console.log(response3))
-			.then(response2 => console.log(response2))
+			.then(response => response.json())
+			.then(response => {
+				console.log(response);
+				console.log('current temp: ' + response.main.temp)
+				setCurrentTemperature(response.main.temp);
+				console.log('city: ' + response.name);
+				setCityName(response.name);
+				console.log('min: ' + response.main.temp_min);
+				setMinTemperature(response.main.temp_min);
+				console.log('max: ' + response.main.temp_max);
+				setMaxTemperature(response.main.temp_max);
+			})
 			.catch(err => console.log(err))
-		setCity(search);
 		setSearch('');
 	}
-	
+
 	const updateSearch = (event) => {
 		setSearch(event.target.value);
-		if(event.keyCode === 13){
-			getData();
-		}
 	}
 
 	return (
@@ -42,14 +48,14 @@ function App(){
  			/>
 			<button 
 				// type = 'submit'
-			  	onClick = {getData}
+			  	onClick = {fetchData}
 			>
 			  	Search
 		  	</button>
 
 		  	<CurrentTemp 
 		  		temp = {currentTemperature}
-		  		city = {city}
+		  		city = {cityName}
 		  	/>
 		</div>
 	);
