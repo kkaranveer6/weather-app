@@ -12,7 +12,7 @@ const CurrentTemp = ({temp, city}) => {
 
 	return (
 		<div>
-			<h3>Current Temp:</h3>
+			<h3>Current Temperature:</h3>
 			<h5>The current temperature in {city} is {temp} degrees Celcius.</h5>
 		</div>
 	);

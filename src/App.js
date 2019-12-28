@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './App.css';
-import CurrentTemp from './components/currentTemp/currentTemp.js';
+import CurrentTemp from './components/CurrentTemp/CurrentTemp.js';
+import MaxTemp from './components/MaxTemp/MaxTemp.js';
+import MinTemp from './components/MinTemp/MinTemp.js';
 
 function App(){
 	const API_KEY = `0b3b530e772fd76341de3dada4786a6b`;
@@ -19,13 +21,9 @@ function App(){
 			.then(response => response.json())
 			.then(response => {
 				console.log(response);
-				console.log('current temp: ' + response.main.temp)
 				setCurrentTemperature(response.main.temp);
-				console.log('city: ' + response.name);
 				setCityName(response.name);
-				console.log('min: ' + response.main.temp_min);
 				setMinTemperature(response.main.temp_min);
-				console.log('max: ' + response.main.temp_max);
 				setMaxTemperature(response.main.temp_max);
 			})
 			.catch(err => console.log(err))
@@ -56,6 +54,16 @@ function App(){
 		  	<CurrentTemp 
 		  		temp = {currentTemperature}
 		  		city = {cityName}
+		  	/>
+
+		  	<MaxTemp
+		  		temp = {maxTemperature}
+		  		city = {cityName}
+		  	/>
+
+		  	<MinTemp
+		  		temp = {minTemperature}
+		  		cit = {cityName}
 		  	/>
 		</div>
 	);
